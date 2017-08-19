@@ -73,22 +73,8 @@
 		var plPG = window.btoa(GibberishAES.enc(plSHAStr, "Q9fbkBF8au24C9wshGRW9ut8ecYpyXye5vhFLtHFdGjRg3a4HxPYRfQaKutZx5N4"));
 		$.post( "transact", {'msg':plPG})
 		  .done(function( data ) {
-		    alert( "Data Loaded: " + data );
+		    alert( "Data Loaded: " + data.resp);
 		  });
-		
-		/* $.ajax({
-	        url : 'transact',
-	        data : {'msg':plPG},
-	        type : 'POST',
-	        processData: false,
-	        contentType: false,
-	        success : function(jsonResponse) {
-	        	
-				},
-			failure : function(jsonResponse) {
-				
-				}
-	    }); */
 		
 		
 	}

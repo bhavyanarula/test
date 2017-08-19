@@ -10,6 +10,7 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javax.xml.bind.DatatypeConverter;
 
 public class TransAction {
 
@@ -42,14 +43,18 @@ public class TransAction {
 		String txn_success = "";
 		//String hash = DigestUtils.shaHex(stringExHash.substring(1));
 		
-		MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+		/*MessageDigest mDigest = MessageDigest.getInstance("SHA1");
         byte[] result = mDigest.digest(stringExHash.getBytes());
         StringBuffer sb = new StringBuffer();
         for (int j = 0; j < result.length; j++) {
             sb.append(Integer.toString((result[j] & 0xff) + 0x100, 16).substring(1));
-        }
+            String hash =  sb.toString();
+        }*/
+		MessageDigest msdDigest = MessageDigest.getInstance("SHA-1");
+        msdDigest.update(stringExHash.substring(1).getBytes("UTF-8"), 0, stringExHash.length()-1);
+        String hash = DatatypeConverter.printHexBinary(msdDigest.digest());
          
-        String hash =  sb.toString();
+        
         
         
 		if(hash.equals(reqParams[6].substring(6))){
